@@ -1,0 +1,8 @@
+You are building an enterprise multi-tenant security workforce platform.
+- TypeScript strict everywhere; no `any`.
+- All DB access via the typed Supabase client; never bypass RLS; never expose the service role key to the client.
+- Every tenant query is implicitly scoped by RLS on org_id — do not add client-side org filtering as a substitute for RLS.
+- UI: Tailwind + shadcn/ui, tokens from tailwind.config; dense enterprise style; dark navy chrome (#1e2530/#262d38), red accent #e53e3e, light gray content bg.
+- Forms: react-hook-form + zod schemas from packages/shared.
+- Server components for reads, server actions for writes, Realtime for live data.
+- Always add loading skeletons, empty states, and error states.

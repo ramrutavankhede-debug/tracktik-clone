@@ -1,0 +1,29 @@
+{
+  "name": "guardops",
+  "private": true,
+  "scripts": {
+    "dev": "turbo run dev --filter=@guardops/web",
+    "dev:web": "turbo run dev --filter=@guardops/web",
+    "dev:mobile": "turbo run start --filter=@guardops/mobile",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "gen:types": "pnpm --filter @guardops/shared gen:types"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2"
+  },
+  "packageManager": "pnpm@9.15.9",
+  "engines": {
+    "node": ">=20"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "react": "18",
+        "react-dom": "18"
+      }
+    }
+  }
+}

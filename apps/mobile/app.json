@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "GuardOps",
+    "slug": "guardops",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "scheme": "guardops",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1e2530"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.guardops.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1e2530"
+      },
+      "package": "com.guardops.app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow GuardOps to scan checkpoint QR codes."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow GuardOps to track your location while on duty."
+        }
+      ]
+    ]
+  }
+}
