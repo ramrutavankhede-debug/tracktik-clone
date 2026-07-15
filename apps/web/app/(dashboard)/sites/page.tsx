@@ -1,14 +1,20 @@
-export default function SitesPage() {
-  return (
-    <Placeholder title="Sites (Client)" hint="Site list and detail land in Prompt 6." />
-  );
-}
+import { Suspense } from "react";
 
-function Placeholder({ title, hint }: { title: string; hint: string }) {
+import { SitesPageClient } from "@/components/sites/sites-page-client";
+import { getSitesPageData } from "@/lib/sites/queries";
+import type { SitesSearchParams } from "@/lib/sites/types";
+import { SitesLoadingSkeleton } from "@/components/sites/sites-loading-skeleton";
+
+export default async function SitesPage({
+  searchParams,
+}: {
+  searchParams: SitesSearchParams;
+}) {
+  const data = await getSitesPageData(searchParams);
+
   return (
-    <div className="space-y-2">
-      <h1 className="text-xl font-semibold text-navy">{title}</h1>
-      <p className="text-sm text-muted-foreground">{hint}</p>
-    </div>
+    <Suspense fallback={<SitesLoadingSkeleton />}>
+      <SitesPageClient data={data} />
+    </Suspense>
   );
 }
