@@ -22,17 +22,17 @@ insert into public.sites (
   id, org_id, client_id, account_uid, account_type, name, address, city, state, country, status,
   contact_first_name, contact_last_name, phone_main, site_template_id
 ) values
-  ('eeeeeeee-eeee-eeee-eeee-eeeeeeeeeee1', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'dddddddd-dddd-dddd-dddd-ddddddddddd1', '11', 'multi', 'City Colleges', '100 Education Rd', 'Melbourne', 'VIC', 'Australia', 'active', 'Manny', 'Singh', '03 9000 1000', 'cccccccc-cccc-cccc-cccc-ccccccccccc2'),
-  ('eeeeeeee-eeee-eeee-eeee-eeeeeeeeeee2', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'dddddddd-dddd-dddd-dddd-ddddddddddd2', '24', 'client', 'TEDI Group', '55 Commercial St', 'Brunswick', 'VIC', 'Australia', 'active', 'Alex', 'Nguyen', '03 9000 2000', 'cccccccc-cccc-cccc-cccc-ccccccccccc1')
+  ('eeeeeeee-eeee-eeee-eeee-eeeeeeeeeee1', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'dddddddd-dddd-dddd-dddd-ddddddddddd1', '11', 'multi', 'City Colleges', '100 Education Rd', 'Melbourne', 'Victoria', 'Australia', 'active', 'Manny', 'Singh', '03 9000 1000', 'cccccccc-cccc-cccc-cccc-ccccccccccc2'),
+  ('eeeeeeee-eeee-eeee-eeee-eeeeeeeeeee2', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'dddddddd-dddd-dddd-dddd-ddddddddddd2', '24', 'client', 'TEDI Group', '55 Commercial St', 'Brunswick', 'Victoria', 'Australia', 'active', 'Alex', 'Nguyen', '03 9000 2000', 'cccccccc-cccc-cccc-cccc-ccccccccccc1')
 on conflict (id) do nothing;
 
 insert into public.sites (
   id, org_id, client_id, parent_client_id, account_uid, account_type, name, address, city, state, country, status,
   contact_first_name, contact_last_name, phone_main, site_template_id
 ) values
-  ('eeeeeeee-eeee-eeee-eeee-eeeeeeeeeee3', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'dddddddd-dddd-dddd-dddd-ddddddddddd1', 'eeeeeeee-eeee-eeee-eeee-eeeeeeeeeee1', '31', 'site', 'TEDI BRUNSWICK', '12 Sydney Rd', 'Brunswick', 'VIC', 'Australia', 'active', 'Manny', 'Singh', '03 9000 1100', 'cccccccc-cccc-cccc-cccc-ccccccccccc1'),
-  ('eeeeeeee-eeee-eeee-eeee-eeeeeeeeeee4', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'dddddddd-dddd-dddd-dddd-ddddddddddd1', 'eeeeeeee-eeee-eeee-eeee-eeeeeeeeeee1', '32', 'site', 'City Colleges - CBD', '200 Collins St', 'Melbourne', 'VIC', 'Australia', 'active', 'Sam', 'Lee', '03 9000 1200', 'cccccccc-cccc-cccc-cccc-ccccccccccc2'),
-  ('eeeeeeee-eeee-eeee-eeee-eeeeeeeeeee5', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', null, null, '40', 'site', 'Warehouse North', '88 Logistics Ave', 'Campbellfield', 'VIC', 'Australia', 'active', 'Jordan', 'Park', '03 9000 1300', 'cccccccc-cccc-cccc-cccc-ccccccccccc1')
+  ('eeeeeeee-eeee-eeee-eeee-eeeeeeeeeee3', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'dddddddd-dddd-dddd-dddd-ddddddddddd1', 'eeeeeeee-eeee-eeee-eeee-eeeeeeeeeee1', '31', 'site', 'TEDI BRUNSWICK', '12 Sydney Rd', 'Brunswick', 'Victoria', 'Australia', 'active', 'Manny', 'Singh', '03 9000 1100', 'cccccccc-cccc-cccc-cccc-ccccccccccc1'),
+  ('eeeeeeee-eeee-eeee-eeee-eeeeeeeeeee4', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'dddddddd-dddd-dddd-dddd-ddddddddddd1', 'eeeeeeee-eeee-eeee-eeee-eeeeeeeeeee1', '32', 'site', 'City Colleges - CBD', '200 Collins St', 'Melbourne', 'Victoria', 'Australia', 'active', 'Sam', 'Lee', '03 9000 1200', 'cccccccc-cccc-cccc-cccc-ccccccccccc2'),
+  ('eeeeeeee-eeee-eeee-eeee-eeeeeeeeeee5', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', null, null, '40', 'site', 'Warehouse North', '88 Logistics Ave', 'Campbellfield', 'Victoria', 'Australia', 'active', 'Jordan', 'Park', '03 9000 1300', 'cccccccc-cccc-cccc-cccc-ccccccccccc1')
 on conflict (id) do nothing;
 
 insert into public.site_zones (site_id, zone_id) values

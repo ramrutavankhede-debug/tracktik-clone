@@ -271,8 +271,10 @@ export function BulkChangeModal({
                 <option value="">System default</option>
                 <option value="Australia/Melbourne">Australia/Melbourne</option>
                 <option value="Australia/Sydney">Australia/Sydney</option>
+                <option value="Australia/Brisbane">Australia/Brisbane</option>
+                <option value="Australia/Perth">Australia/Perth</option>
+                <option value="Pacific/Auckland">Pacific/Auckland</option>
                 <option value="UTC">UTC</option>
-                <option value="America/New_York">America/New_York</option>
               </select>
             </span>
           </label>

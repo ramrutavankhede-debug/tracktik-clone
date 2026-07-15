@@ -9,6 +9,7 @@ import { Plus, Upload, X } from "lucide-react";
 import { TypeBadge } from "@/components/sites/type-badge";
 import { createSiteAction } from "@/app/(dashboard)/sites/actions";
 import { createClient } from "@/lib/supabase/client";
+import { SITE_COUNTRIES, SITE_COUNTRY_OPTIONS } from "@/lib/sites/geo";
 import type {
   EmployeeOption,
   ParentClientOption,
@@ -23,29 +24,12 @@ const TIMEZONES = [
   "UTC",
   "Australia/Melbourne",
   "Australia/Sydney",
-  "America/New_York",
-  "America/Chicago",
-  "America/Los_Angeles",
-  "Europe/London",
+  "Australia/Brisbane",
+  "Australia/Perth",
+  "Australia/Adelaide",
+  "Pacific/Auckland",
 ];
 
-const COUNTRIES: Record<string, string[]> = {
-  Australia: ["ACT", "NSW", "NT", "QLD", "SA", "TAS", "VIC", "WA"],
-  "United States": [
-    "AL",
-    "AK",
-    "AZ",
-    "CA",
-    "CO",
-    "FL",
-    "IL",
-    "NY",
-    "TX",
-    "WA",
-  ],
-  Canada: ["AB", "BC", "MB", "NB", "NL", "NS", "ON", "PE", "QC", "SK"],
-  "United Kingdom": ["England", "Scotland", "Wales", "Northern Ireland"],
-};
 
 type Props = {
   open: boolean;
@@ -159,7 +143,7 @@ export function NewSiteModal({
   const accountType = form.watch("accountType");
   const country = form.watch("country");
   const tags = form.watch("tags") ?? [];
-  const states = country ? (COUNTRIES[country] ?? []) : [];
+  const states = country ? (SITE_COUNTRIES[country] ?? []) : [];
 
   const filteredEmployees = useMemo(() => {
     const match = (q: string) =>
@@ -514,7 +498,7 @@ export function NewSiteModal({
                 <Field label="Country">
                   <select className={inputClass} {...form.register("country")}>
                     <option value="">Choose One</option>
-                    {Object.keys(COUNTRIES).map((c) => (
+                    {SITE_COUNTRY_OPTIONS.map((c) => (
                       <option key={c} value={c}>
                         {c}
                       </option>
