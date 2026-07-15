@@ -1,10 +1,20 @@
-export default function EmployeesPage() {
+import { Suspense } from "react";
+
+import { EmployeesPageClient } from "@/components/employees/employees-page-client";
+import {
+  getEmployeesPageData,
+  type EmployeesSearchParams,
+} from "@/lib/employees/queries";
+
+export default async function EmployeesPage({
+  searchParams,
+}: {
+  searchParams: EmployeesSearchParams;
+}) {
+  const data = await getEmployeesPageData(searchParams);
   return (
-    <div className="space-y-2">
-      <h1 className="text-xl font-semibold text-navy">Employees</h1>
-      <p className="text-sm text-muted-foreground">
-        Placeholder — employee directory and roles come with auth / settings prompts.
-      </p>
-    </div>
+    <Suspense fallback={<div className="p-4 text-sm text-muted-foreground">Loading…</div>}>
+      <EmployeesPageClient data={data} />
+    </Suspense>
   );
 }
