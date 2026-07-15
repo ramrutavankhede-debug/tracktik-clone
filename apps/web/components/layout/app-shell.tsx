@@ -17,13 +17,28 @@ import { useState } from "react";
 
 import { cn } from "@/lib/utils";
 
-const NAV_ITEMS = [
+type NavItem = {
+  href: string;
+  label: string;
+  icon: typeof Monitor;
+  children?: { href: string; label: string }[];
+};
+
+const NAV_ITEMS: NavItem[] = [
   { href: "/dashboard", label: "Dashboards", icon: Monitor },
-  { href: "/sites", label: "Sites (Client)", icon: Users },
+  {
+    href: "/sites",
+    label: "Sites (Client)",
+    icon: Users,
+    children: [
+      { href: "/sites", label: "Site List" },
+      { href: "/sites/zones", label: "Site Zones (Groups)" },
+    ],
+  },
   { href: "/employees", label: "Employees", icon: Users },
   { href: "/maps", label: "Maps", icon: MapPin },
   { href: "/settings", label: "Settings", icon: Ellipsis },
-] as const;
+];
 
 const SECONDARY_TABS = [
   { href: "/dashboard", label: "Live Dashboard" },
@@ -75,6 +90,12 @@ function TopBar({ onMenuClick }: { onMenuClick: () => void }) {
   );
 }
 
+function isSitesListPath(pathname: string) {
+  if (pathname === "/sites") return true;
+  if (!pathname.startsWith("/sites/")) return false;
+  return !pathname.startsWith("/sites/zones");
+}
+
 function Sidebar({
   open,
   onClose,
@@ -83,6 +104,18 @@ function Sidebar({
   onClose: () => void;
 }) {
   const pathname = usePathname();
+  const [sitesMenuOpen, setSitesMenuOpen] = useState(false);
+
+  function isActive(href: string, children?: NavItem["children"]) {
+    if (children?.length) {
+      return (
+        isSitesListPath(pathname) ||
+        pathname === "/sites/zones" ||
+        pathname.startsWith("/sites/zones/")
+      );
+    }
+    return pathname === href || pathname.startsWith(`${href}/`);
+  }
 
   return (
     <>
@@ -119,9 +152,68 @@ function Sidebar({
         </div>
 
         <nav className="mt-4 flex flex-col gap-1 px-1">
-          {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
-            const active =
-              pathname === href || pathname.startsWith(`${href}/`);
+          {NAV_ITEMS.map(({ href, label, icon: Icon, children }) => {
+            const active = isActive(href, children);
+            const isSites = Boolean(children?.length);
+
+            if (isSites) {
+              return (
+                <div
+                  key={href}
+                  className="relative"
+                  onMouseEnter={() => setSitesMenuOpen(true)}
+                  onMouseLeave={() => setSitesMenuOpen(false)}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setSitesMenuOpen((v) => !v)}
+                    className={cn(
+                      "relative flex w-full flex-col items-center gap-1 rounded-sm px-2 py-3 text-center text-[11px] leading-tight",
+                      active
+                        ? "bg-sidebar-hover text-white"
+                        : "text-sidebar-fg hover:bg-sidebar-hover/60 hover:text-white",
+                    )}
+                  >
+                    {active ? (
+                      <span className="absolute bottom-1 left-0 top-1 w-[3px] rounded-r bg-accent" />
+                    ) : null}
+                    <Icon className="h-5 w-5" strokeWidth={1.75} />
+                    <span>{label}</span>
+                  </button>
+
+                  {sitesMenuOpen ? (
+                    <div className="absolute left-full top-0 z-50 ml-1 w-52 rounded border border-[#3a4452] bg-[#1e2530] py-1 shadow-xl">
+                      {children!.map((child) => {
+                        const childActive =
+                          child.href === "/sites"
+                            ? isSitesListPath(pathname)
+                            : pathname === child.href ||
+                              pathname.startsWith(`${child.href}/`);
+                        return (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            onClick={() => {
+                              setSitesMenuOpen(false);
+                              onClose();
+                            }}
+                            className={cn(
+                              "block px-3 py-2 text-sm",
+                              childActive
+                                ? "bg-sidebar-hover text-white"
+                                : "text-sidebar-fg hover:bg-sidebar-hover hover:text-white",
+                            )}
+                          >
+                            {child.label}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  ) : null}
+                </div>
+              );
+            }
+
             return (
               <Link
                 key={href}
